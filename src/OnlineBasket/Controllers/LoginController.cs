@@ -10,6 +10,7 @@
     [ApiController]
     public class LoginController : ControllerBase
     {
+        [ApiExplorerSettings(IgnoreApi = true)]
         [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<object>> PostAsync([FromServices] IAuthenticationService authenticationService)
