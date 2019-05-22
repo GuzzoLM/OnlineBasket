@@ -19,6 +19,7 @@
             Request.Form.TryGetValue("username", out var username);
             Request.Form.TryGetValue("password", out var password);
 
+            // This is hurting my eyes, but I will focus on most important things first
             var user = new User
             {
                 Id = Guid.Empty,
