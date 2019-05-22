@@ -14,12 +14,12 @@
         {
             _items = new List<T>();
         }
-        public Task<bool> Add(T user)
+        public Task<bool> Add(T item)
         {
-            if (_items.Any(existent => existent.Id == user.Id))
+            if (_items.Any(existent => existent.Id == item.Id))
                 return Task.FromResult(false);
 
-            _items.Add(user);
+            _items.Add(item);
             return Task.FromResult(true);
         }
 
@@ -44,5 +44,18 @@
         }
 
         public Task<List<T>> Items() => Task.FromResult(_items.ToList());
+
+        public Task<bool> Update(Guid id, T item)
+        {
+            var existentItem = _items.FirstOrDefault(x => x.Id == item.Id);
+
+            if (existentItem == null)
+                return Task.FromResult(false);
+
+            _items.Remove(existentItem);
+            _items.Add(item);
+
+            return Task.FromResult(true);
+        }
     }
 }

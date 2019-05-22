@@ -85,5 +85,37 @@
                 .Should()
                 .Be(expectedResult);
         }
+
+        [Fact]
+        public async Task GenericCollection_UpdateItem_ShouldReturnTrue()
+        {
+            // Arrange
+            var initialPrice = 100;
+            var finalPrice = 200;
+
+            var collection = new StubCollection();
+            var item = _fixture
+                .Build<StubModel>()
+                .With(x => x.Price, initialPrice)
+                .Create();
+
+            await collection.Add(item);
+
+            item.Price = finalPrice;
+            var expectedResult = true;
+
+            // Act
+            var result = await collection.Update(item.Id, item);
+            var finalItem = (await collection.Items()).FirstOrDefault(x => x.Id == item.Id);
+
+            // Assert
+            result
+                .Should()
+                .Be(expectedResult);
+
+            finalItem.Price
+                .Should()
+                .Be(finalPrice);
+        }
     }
 }

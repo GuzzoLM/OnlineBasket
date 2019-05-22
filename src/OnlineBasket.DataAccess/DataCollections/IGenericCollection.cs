@@ -9,10 +9,12 @@
     {
         Task<List<T>> Items();
 
-        Task<bool> Add(T user);
+        Task<bool> Add(T item);
 
-        Task<bool> Add(IEnumerable<T> users);
+        Task<bool> Add(IEnumerable<T> items);
 
         Task<bool> Delete(Guid id);
+
+        Task<bool> Update(Guid id, T item);
     }
 }
