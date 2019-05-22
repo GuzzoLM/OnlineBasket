@@ -7,7 +7,7 @@
 
     public interface IGenericCollection<T> where T : IIdAware
     {
-        Task<List<T>> GetUsers();
+        Task<List<T>> GetItems();
 
         Task<bool> Add(T user);
 

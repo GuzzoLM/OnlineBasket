@@ -21,7 +21,7 @@
 
         public async Task<User> FindUser(string userName)
         {
-            var users = await _userCollection.GetUsers();
+            var users = await _userCollection.GetItems();
             return users.FirstOrDefault(user => user.UserName == userName);
         }
     }
