@@ -7,14 +7,14 @@
 
     public interface IProductRepository
     {
-        Task<List<Product>> Get(string name, decimal price, int stock);
+        Task<List<Product>> GetItems(string name = null, decimal? price = null, int? stock = null);
 
         Task<Product> Get(Guid id);
 
         Task<Guid> Create(Product item);
 
-        Task<bool> Update(Guid id, Product item);
+        Task Update(Guid id, Product item);
 
-        Task<bool> Delete(Guid id);
+        Task Delete(Guid id);
     }
 }
