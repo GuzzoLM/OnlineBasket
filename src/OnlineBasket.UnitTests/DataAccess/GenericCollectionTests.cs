@@ -60,7 +60,7 @@
             var expectedResult = items.ToList();
 
             // Act
-            var result = await collection.GetItems();
+            var result = await collection.Items();
 
             // Assert
             result

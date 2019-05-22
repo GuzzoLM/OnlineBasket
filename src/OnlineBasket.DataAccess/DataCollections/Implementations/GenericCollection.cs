@@ -43,6 +43,6 @@
             return Task.FromResult(true);
         }
 
-        public Task<List<T>> GetItems() => Task.FromResult(_items.ToList());
+        public Task<List<T>> Items() => Task.FromResult(_items.ToList());
     }
 }
