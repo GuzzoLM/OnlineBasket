@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using OnlineBasket.Domain.Model;
 
-    public interface IProductService
+    public interface IProductRepository
     {
         Task<List<Product>> Get(string name, decimal price, int stock);
 

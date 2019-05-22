@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
     using OnlineBasket.Domain.Access;
 
-    public interface IUserService
+    public interface IUserRepository
     {
         Task<User> FindUser(string userName);
 

@@ -26,7 +26,7 @@
             services.AddSingleton<IUserCollection, UserCollection>();
             services.AddSingleton<IProductCollection, ProductCollection>();
 
-            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
 
             return services;

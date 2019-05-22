@@ -5,11 +5,11 @@
     using OnlineBasket.DataAccess.DataCollections;
     using OnlineBasket.Domain.Access;
 
-    public class UserService : IUserService
+    public class UserRepository : IUserRepository
     {
         private readonly IUserCollection _userCollection;
 
-        public UserService(IUserCollection userCollection)
+        public UserRepository(IUserCollection userCollection)
         {
             _userCollection = userCollection;
         }
