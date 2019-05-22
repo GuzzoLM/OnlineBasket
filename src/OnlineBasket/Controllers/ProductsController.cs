@@ -10,7 +10,13 @@ namespace OnlineBasket.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        // GET: api/Products
+        /// <summary>
+        /// Endpoint to search for products filtered by given parameters
+        /// </summary>
+        /// <param name="name">The name of the item</param>
+        /// <param name="price">The price of the item</param>
+        /// <param name="stock">The number of available items in stock</param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> Get(
             [FromQuery] string name = null,
@@ -38,7 +44,11 @@ namespace OnlineBasket.Controllers
             return Ok(products);
         }
 
-        // GET: api/Products/5
+        /// <summary>
+        /// Get specific product by Id
+        /// </summary>
+        /// <param name="id">The unique identifier of the product</param>
+        /// <returns></returns>
         [HttpGet("{id}", Name = "Get")]
         public async Task<ActionResult<Product>> Get(Guid id)
         {
@@ -53,7 +63,11 @@ namespace OnlineBasket.Controllers
             return Ok(product);
         }
 
-        // POST: api/Products
+        /// <summary>
+        /// Add a new product
+        /// </summary>
+        /// <param name="newProduct">The new product to be added</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Guid>> Post([FromBody] Product newProduct)
         {
@@ -62,18 +76,27 @@ namespace OnlineBasket.Controllers
             return CreatedAtAction(nameof(Get), new { id = successGuid }, successGuid);
         }
 
-        // PUT: api/Products/5
+        /// <summary>
+        /// Update an existing product
+        /// </summary>
+        /// <param name="id">Unique identifier of the product to be updated</param>
+        /// <param name="product">The updated product</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(int id, [FromBody] string value)
+        public async Task<ActionResult> Put(Guid id, [FromBody] Product product)
         {
             var success = await Task.FromResult(true);
 
             return NoContent();
         }
 
-        // DELETE: api/ApiWithActions/5
+        /// <summary>
+        /// Delete an existing product
+        /// </summary>
+        /// <param name="id">Unique identifier of the product to be deleted</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(Guid id)
         {
             var success = await Task.FromResult(true);
 
