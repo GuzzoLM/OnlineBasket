@@ -24,6 +24,7 @@
         internal static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services.AddSingleton<IUserCollection, UserCollection>();
+            services.AddSingleton<IProductCollection, ProductCollection>();
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();

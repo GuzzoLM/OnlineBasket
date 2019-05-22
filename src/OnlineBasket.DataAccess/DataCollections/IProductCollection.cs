@@ -2,7 +2,7 @@
 {
     using OnlineBasket.Domain.Model;
 
-    internal interface IProducCollection : IGenericCollection<Product>
+    public interface IProductCollection : IGenericCollection<Product>
     {
     }
 }

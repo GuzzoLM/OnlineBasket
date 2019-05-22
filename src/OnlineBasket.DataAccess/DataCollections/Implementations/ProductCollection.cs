@@ -5,7 +5,7 @@ using OnlineBasket.Domain.Model;
 
 namespace OnlineBasket.DataAccess.DataCollections.Implementations
 {
-    public class ProductCollection : GenericCollection<Product>, IProducCollection
+    public class ProductCollection : GenericCollection<Product>, IProductCollection
     {
         public ProductCollection()
         {
