@@ -1,5 +1,6 @@
 ﻿namespace OnlineBasket.Controllers
 {
+    using System;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,7 @@
 
             var user = new User
             {
+                Id = Guid.Empty,
                 UserName = username,
                 Password = password
             };

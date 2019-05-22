@@ -34,6 +34,7 @@
 
             if (existentUser == null)
             {
+                user.Id = Guid.NewGuid();
                 await _userService.AddUser(user);
                 existentUser = await _userService.FindUser(user.UserName);
             }
