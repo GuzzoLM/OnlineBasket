@@ -13,7 +13,7 @@
     public class ProductsController : ControllerBase
     {
         /// <summary>
-        /// Endpoint to search for products filtered by given parameters
+        /// Search for products filtered by given parameters
         /// </summary>
         /// <param name="name">The name of the item</param>
         /// <param name="price">The price of the item</param>
