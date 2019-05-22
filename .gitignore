@@ -2,13 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs
-/OnlineBasket/bin/Debug/netcoreapp2.1
-/OnlineBasket/obj/Debug/netcoreapp2.1
-/OnlineBasket/obj
-/OnlineBasket.DataAccess/bin/Debug/netcoreapp2.1
-/OnlineBasket.DataAccess/obj
-/OnlineBasket.Domain/bin/Debug/netcoreapp2.1
-/OnlineBasket.Domain/obj
-/OnlineBasket.Security/bin/Debug/netcoreapp2.1
-/OnlineBasket.Security/obj
+.vs
+bin
+obj
