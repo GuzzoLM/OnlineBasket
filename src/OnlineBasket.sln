@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineBasket.DataAccess", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineBasket.Domain", "OnlineBasket.Domain\OnlineBasket.Domain.csproj", "{3E536C54-3073-4F84-B479-E8EA938B02AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineBasket.UnitTests", "OnlineBasket.UnitTests\OnlineBasket.UnitTests.csproj", "{A7AC7A2D-2CF9-40C8-9235-28BE427F5D40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineBasket.UnitTests", "OnlineBasket.UnitTests\OnlineBasket.UnitTests.csproj", "{A7AC7A2D-2CF9-40C8-9235-28BE427F5D40}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{E7330781-BB34-4D14-A348-FA9CC9B005AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineBasket.Client", "OnlineBasket.Client\OnlineBasket.Client.csproj", "{979C653C-86D9-4FE7-92AE-0DCC1865696B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineBasket.Client", "OnlineBasket.Client\OnlineBasket.Client.csproj", "{979C653C-86D9-4FE7-92AE-0DCC1865696B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

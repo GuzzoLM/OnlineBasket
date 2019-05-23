@@ -27,7 +27,7 @@
         }
 
         /// <summary>
-        ///
+        /// Search for all logged user's baskets
         /// </summary>
         /// <param name="ownerId"></param>
         /// <param name="status"></param>
