@@ -34,12 +34,12 @@
 
         public Task<bool> Delete(Guid id)
         {
-            var userToRemove = _items.FirstOrDefault(existent => existent.Id == id);
+            var itemToRemove = _items.FirstOrDefault(existent => existent.Id == id);
 
-            if (userToRemove == null)
+            if (itemToRemove == null)
                 return Task.FromResult(false);
 
-            _items.Remove(userToRemove);
+            _items.Remove(itemToRemove);
             return Task.FromResult(true);
         }
 

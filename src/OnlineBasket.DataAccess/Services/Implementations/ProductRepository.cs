@@ -23,7 +23,7 @@
             if (result)
                 return item.Id;
 
-            throw new Exception("Failed to save in database");
+            throw new ArgumentException("Item already exists");
         }
 
         public async Task Delete(Guid id)
@@ -31,15 +31,12 @@
             var result = await _productCollection.Delete(id);
 
             if (!result)
-                throw new Exception("Failed to delete item from database");
+                throw new KeyNotFoundException("Failed to delete item from database");
         }
 
         public async Task<List<Product>> GetItems(string name = null, decimal? price = null, int? stock = null)
         {
             IEnumerable<Product> items = await _productCollection.Items();
-
-            if (items == null)
-                throw new Exception("Failed fetch items from database");
 
             items = (!string.IsNullOrEmpty(name)) ? items.Where(x => x.Name == name) : items;
             items = (price != null) ? items.Where(x => x.Price == price) : items;
@@ -52,13 +49,10 @@
         {
             IEnumerable<Product> items = await _productCollection.Items();
 
-            if (items == null)
-                throw new Exception("Failed fetch items from database");
-
             var item = items.FirstOrDefault(x => x.Id == id);
 
             if (item == null)
-                throw new Exception("Item not found");
+                throw new KeyNotFoundException("Item not found");
 
             return item;
         }
@@ -68,7 +62,7 @@
             var result = await _productCollection.Update(id, item);
 
             if (!result)
-                throw new Exception("Failed to update item");
+                throw new KeyNotFoundException("Item not found");
         }
     }
 }
