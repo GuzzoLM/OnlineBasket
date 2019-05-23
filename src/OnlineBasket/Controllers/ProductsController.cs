@@ -29,8 +29,10 @@
         /// <param name="stock">The number of available items in stock</param>
         /// <returns></returns>
         /// <response code="200">Returns found items</response>
+        /// <response code="401">Unauthorized request. Please log in.</response>
         [HttpGet]
         [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
         public async Task<ActionResult<IEnumerable<Product>>> Get(
             [FromQuery] string name = null,
             [FromQuery] decimal? price = null,
@@ -46,9 +48,11 @@
         /// <param name="id">The unique identifier of the product</param>
         /// <returns></returns>
         /// <response code="200">Returns found item</response>
+        /// <response code="401">Unauthorized request. Please log in.</response>
         /// <response code="404">Item was not found</response>
         [HttpGet("{id}", Name = "Get")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
         [ProducesResponseType(404)]
         public async Task<ActionResult<Product>> Get(Guid id)
         {
@@ -69,10 +73,12 @@
         /// <param name="newProduct">The new product to be added</param>
         /// <returns></returns>
         /// <response code="201">Item successfully created</response>
-        /// <response code="400">Item already exists</response>
+        /// <response code="400">Provided item is not valid</response>
+        /// <response code="401">Unauthorized request. Please log in.</response>
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public async Task<ActionResult<Guid>> Post([FromBody] Product newProduct)
         {
             try
@@ -93,9 +99,11 @@
         /// <param name="product">The updated product</param>
         /// <returns></returns>
         /// <response code="204">Item successfully updated</response>
+        /// <response code="401">Unauthorized request. Please log in.</response>
         /// <response code="404">Item was not found</response>
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
+        [ProducesResponseType(401)]
         [ProducesResponseType(404)]
         public async Task<ActionResult> Put(Guid id, [FromBody] Product product)
         {
@@ -117,9 +125,11 @@
         /// <param name="id">Unique identifier of the product to be deleted</param>
         /// <returns></returns>
         /// <response code="204">Item successfully updated</response>
+        /// <response code="401">Unauthorized request. Please log in.</response>
         /// <response code="404">Item was not found</response>
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
+        [ProducesResponseType(401)]
         [ProducesResponseType(404)]
         public async Task<ActionResult> Delete(Guid id)
         {
