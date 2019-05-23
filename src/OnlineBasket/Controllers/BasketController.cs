@@ -27,9 +27,8 @@
         }
 
         /// <summary>
-        /// Search for all logged user's baskets
+        /// Search for all baskets wich the user is owner.
         /// </summary>
-        /// <param name="ownerId"></param>
         /// <param name="status"></param>
         /// <returns></returns>
         /// <response code="200">Returns found items</response>
@@ -53,7 +52,7 @@
         }
 
         /// <summary>
-        ///
+        /// Get a specific basket. If user is not the owner, access is denied.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -73,6 +72,10 @@
             try
             {
                 var basket = await _basketRepository.Get(id);
+
+                if (basket.OwnerId != ownerId.Value)
+                    return StatusCode(401);
+
                 return Ok(basket.ToDTO(userName));
             }
             catch (KeyNotFoundException)
@@ -82,7 +85,7 @@
         }
 
         /// <summary>
-        ///
+        /// Create a basket for the user. If an open basket already exists gives error 400
         /// </summary>
         /// <param name="userRepository"></param>
         /// <returns></returns>
@@ -116,7 +119,7 @@
         }
 
         /// <summary>
-        ///
+        /// Delete a specific basket. If the user is not the owner return access denied instead.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -127,11 +130,18 @@
         [ProducesResponseType(204)]
         [ProducesResponseType(401)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete([FromServices] IUserRepository userRepository, Guid id)
         {
+            var userName = User.Identity.Name;
+
+            var userId = (await userRepository.FindUser(userName))?.Id;
+
+            if (!userId.HasValue)
+                return StatusCode(401);
+
             try
             {
-                await _basketRepository.Delete(id);
+                await _basketRepository.Delete(userId.Value, id);
 
                 return NoContent();
             }
