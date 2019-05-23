@@ -25,7 +25,7 @@
             {
                 ProductId = productGroup.ProductId,
                 Quantity = productGroup.Quantity,
-                UnitPrice = productGroup.UnitPrice
+                UnitPrice = productGroup.UnitPrice ?? 0
             };
         }
 
@@ -66,7 +66,7 @@
             };
         }
 
-        public static BasketDTO ToModel(this Basket basket, string username)
+        public static BasketDTO ToDTO(this Basket basket, string username)
         {
             return new BasketDTO
             {

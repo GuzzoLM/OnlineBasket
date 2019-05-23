@@ -81,7 +81,11 @@
             });
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute("basketAware", "{bid}/{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }

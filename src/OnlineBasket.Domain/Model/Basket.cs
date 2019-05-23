@@ -14,11 +14,23 @@
 
         public List<ProductGroup> Items { get; set; }
 
+        public BasketStatus Status { get; set; }
+
         public decimal TotalPrice => Items
             .Select(x => x.TotalPrice)
-            .Aggregate((x, y) => x + y);
+            .Aggregate(0M, (x, y) => x + y);
 
-        public BasketStatus Status { get; set; }
+        public Basket()
+        {
+        }
+
+        public Basket(Guid ownerId)
+        {
+            Id = Guid.NewGuid();
+            OwnerId = ownerId;
+            Items = new List<ProductGroup>();
+            Status = BasketStatus.Open;
+        }
 
         public IDictionary<Guid, int> ClearBasket()
         {
@@ -26,6 +38,16 @@
             Items = new List<ProductGroup>();
 
             return returnedItems;
+        }
+
+        public Product UpsertItem(Product product, int quantity)
+        {
+            var existentQuantity = Items.FirstOrDefault(x => x.ProductId == product.Id)?.Quantity ?? 0;
+
+            var quantityToRemove = existentQuantity - quantity;
+            var quantityToAdd = quantityToRemove * -1;
+
+            return (quantityToRemove < 0) ? AddItem(product, quantityToAdd) : RemoveItem(product, quantityToRemove);
         }
 
         public Product AddItem(Product product, int quantity)
@@ -73,6 +95,20 @@
                 productGroup.Quantity = finalQuantity;
 
             product.Stock += quantity;
+
+            return product;
+        }
+
+        public Product CompletelyRemoveItem(Product product)
+        {
+            var productGroup = Items.FirstOrDefault(x => x.ProductId == product.Id);
+
+            if (productGroup == null)
+                throw new KeyNotFoundException();
+
+            product.Stock += productGroup.Quantity;
+
+            Items.Remove(productGroup);
 
             return product;
         }
