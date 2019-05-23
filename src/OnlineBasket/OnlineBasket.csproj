@@ -4,6 +4,12 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.1\OnlineBasket.xml</DocumentationFile>
+    <NoWarn>1701;1702; 1591</NoWarn>
+    <OutputPath>bin\Debug\netcoreapp2.1</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>

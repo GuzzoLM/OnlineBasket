@@ -13,13 +13,13 @@
 
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly IUserService _userService;
+        private readonly IUserRepository _userService;
 
         private readonly TokenConfigurations _tokenConfigurations;
         private readonly SigningConfigurations _signingConfigurations;
 
         public AuthenticationService(
-            IUserService userService,
+            IUserRepository userService,
             TokenConfigurations tokenConfigurations,
             SigningConfigurations signingConfigurations)
         {
@@ -34,6 +34,7 @@
 
             if (existentUser == null)
             {
+                user.Id = Guid.NewGuid();
                 await _userService.AddUser(user);
                 existentUser = await _userService.FindUser(user.UserName);
             }

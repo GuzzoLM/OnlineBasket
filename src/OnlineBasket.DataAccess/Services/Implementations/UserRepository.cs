@@ -5,11 +5,11 @@
     using OnlineBasket.DataAccess.DataCollections;
     using OnlineBasket.Domain.Access;
 
-    public class UserService : IUserService
+    public class UserRepository : IUserRepository
     {
         private readonly IUserCollection _userCollection;
 
-        public UserService(IUserCollection userCollection)
+        public UserRepository(IUserCollection userCollection)
         {
             _userCollection = userCollection;
         }
@@ -21,7 +21,7 @@
 
         public async Task<User> FindUser(string userName)
         {
-            var users = await _userCollection.GetUsers();
+            var users = await _userCollection.Items();
             return users.FirstOrDefault(user => user.UserName == userName);
         }
     }
