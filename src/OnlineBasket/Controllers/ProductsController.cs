@@ -5,13 +5,22 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using OnlineBasket.DataAccess.Services;
     using OnlineBasket.DTO;
+    using OnlineBasket.DTO.TypeAdapters;
 
     [Authorize("Bearer")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        private readonly IProductRepository _productRepository;
+
+        public ProductsController(IProductRepository productRepository)
+        {
+            _productRepository = productRepository;
+        }
+
         /// <summary>
         /// Search for products filtered by given parameters
         /// </summary>
@@ -25,23 +34,7 @@
             [FromQuery] decimal? price = null,
             [FromQuery] int? stock = null)
         {
-            var products = await Task.FromResult(new List<Product>
-            {
-                new Product
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "Shirt",
-                    Price = 100,
-                    Stock = 15
-                },
-                new Product
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "Shoe",
-                    Price = 200,
-                    Stock = 15
-                }
-            });
+            var products = await _productRepository.GetItems(name, price, stock);
 
             return Ok(products);
         }
@@ -54,13 +47,7 @@
         [HttpGet("{id}", Name = "Get")]
         public async Task<ActionResult<Product>> Get(Guid id)
         {
-            var product = await Task.FromResult(new Product
-            {
-                Id = id,
-                Name = "Shirt",
-                Price = 100,
-                Stock = 15
-            });
+            var product = await _productRepository.Get(id);
 
             return Ok(product);
         }
@@ -73,7 +60,7 @@
         [HttpPost]
         public async Task<ActionResult<Guid>> Post([FromBody] Product newProduct)
         {
-            var successGuid = await Task.FromResult(Guid.NewGuid());
+            var successGuid = await _productRepository.Create(newProduct.ToModel());
 
             return CreatedAtAction(nameof(Get), new { id = successGuid }, successGuid);
         }
@@ -87,7 +74,7 @@
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(Guid id, [FromBody] Product product)
         {
-            var success = await Task.FromResult(true);
+            await _productRepository.Update(id, product.ToModel());
 
             return NoContent();
         }
@@ -100,7 +87,7 @@
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            var success = await Task.FromResult(true);
+            await _productRepository.Delete(id);
 
             return NoContent();
         }
