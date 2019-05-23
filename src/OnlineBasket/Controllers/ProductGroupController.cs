@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using OnlineBasket.DataAccess.Services;
-    using OnlineBasket.DTO;
+    using OnlineBasket.Domain.DTO;
 
     [Route("api/{bid}/[controller]")]
     [ApiController]
@@ -21,7 +21,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="bid"></param>
         /// <param name="productGroup"></param>
@@ -52,7 +52,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="bid"></param>
         /// <param name="id"></param>

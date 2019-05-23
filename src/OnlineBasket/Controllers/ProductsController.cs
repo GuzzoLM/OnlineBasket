@@ -6,8 +6,8 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using OnlineBasket.DataAccess.Services;
-    using OnlineBasket.DTO;
-    using OnlineBasket.DTO.TypeAdapters;
+    using OnlineBasket.Domain.DTO;
+    using OnlineBasket.Domain.DTO.TypeAdapters;
 
     [Authorize("Bearer")]
     [Route("api/[controller]")]

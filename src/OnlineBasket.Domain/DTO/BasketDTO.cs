@@ -1,4 +1,4 @@
-﻿namespace OnlineBasket.DTO
+﻿namespace OnlineBasket.Domain.DTO
 {
     using System;
     using System.Collections.Generic;
