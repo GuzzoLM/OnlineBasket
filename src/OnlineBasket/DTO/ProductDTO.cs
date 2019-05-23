@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class Product
+    public class ProductDTO
     {
         public Guid? Id { get; set; }
 
