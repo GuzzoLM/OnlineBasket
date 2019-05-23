@@ -29,6 +29,7 @@
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IBasketRepository, BasketRepository>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
 
             return services;
