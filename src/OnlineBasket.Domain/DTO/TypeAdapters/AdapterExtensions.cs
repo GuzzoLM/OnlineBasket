@@ -1,4 +1,4 @@
-﻿namespace OnlineBasket.DTO.TypeAdapters
+﻿namespace OnlineBasket.Domain.DTO.TypeAdapters
 {
     using System;
     using System.Linq;

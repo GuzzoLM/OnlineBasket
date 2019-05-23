@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineBasket.DataAccess", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineBasket.Domain", "OnlineBasket.Domain\OnlineBasket.Domain.csproj", "{3E536C54-3073-4F84-B479-E8EA938B02AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineBasket.UnitTests", "OnlineBasket.UnitTests\OnlineBasket.UnitTests.csproj", "{A7AC7A2D-2CF9-40C8-9235-28BE427F5D40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineBasket.UnitTests", "OnlineBasket.UnitTests\OnlineBasket.UnitTests.csproj", "{A7AC7A2D-2CF9-40C8-9235-28BE427F5D40}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{E7330781-BB34-4D14-A348-FA9CC9B005AB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineBasket.Client", "OnlineBasket.Client\OnlineBasket.Client.csproj", "{979C653C-86D9-4FE7-92AE-0DCC1865696B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,16 @@ Global
 		{A7AC7A2D-2CF9-40C8-9235-28BE427F5D40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7AC7A2D-2CF9-40C8-9235-28BE427F5D40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7AC7A2D-2CF9-40C8-9235-28BE427F5D40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{979C653C-86D9-4FE7-92AE-0DCC1865696B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{979C653C-86D9-4FE7-92AE-0DCC1865696B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{979C653C-86D9-4FE7-92AE-0DCC1865696B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{979C653C-86D9-4FE7-92AE-0DCC1865696B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{979C653C-86D9-4FE7-92AE-0DCC1865696B} = {E7330781-BB34-4D14-A348-FA9CC9B005AB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4BDB8244-7897-4A38-8C68-C5B73747C6BE}

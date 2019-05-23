@@ -2,16 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using OnlineBasket.DataAccess.Services;
+    using OnlineBasket.Domain.DTO;
+    using OnlineBasket.Domain.DTO.TypeAdapters;
     using OnlineBasket.Domain.Enums;
     using OnlineBasket.Domain.Model;
-    using OnlineBasket.DTO;
-    using OnlineBasket.DTO.TypeAdapters;
 
     [Authorize("Bearer")]
     [Route("api/[controller]")]
@@ -20,6 +19,7 @@
     {
         private readonly IBasketRepository _basketRepository;
         private readonly IProductRepository _productRepository;
+
         public BasketController(IBasketRepository basketRepository, IProductRepository productRepository)
         {
             _basketRepository = basketRepository;
@@ -27,7 +27,7 @@
         }
 
         /// <summary>
-        /// 
+        /// Search for all logged user's baskets
         /// </summary>
         /// <param name="ownerId"></param>
         /// <param name="status"></param>
@@ -53,7 +53,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -61,12 +61,19 @@
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<BasketDTO>> GetBasket(Guid id)
+        public async Task<ActionResult<BasketDTO>> GetBasket([FromServices] IUserRepository userRepository, Guid id)
         {
+            var userName = User.Identity.Name;
+
+            var ownerId = (await userRepository.FindUser(userName))?.Id;
+
+            if (!ownerId.HasValue)
+                return StatusCode(401);
+
             try
             {
                 var basket = await _basketRepository.Get(id);
-                return Ok(basket);
+                return Ok(basket.ToDTO(userName));
             }
             catch (KeyNotFoundException)
             {
@@ -75,7 +82,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="userRepository"></param>
         /// <returns></returns>
@@ -109,7 +116,7 @@
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
