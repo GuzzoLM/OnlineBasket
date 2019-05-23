@@ -34,13 +34,17 @@
 
         public Task<IEnumerable<BasketDTO>> GetBaskets(BasketStatus? status)
         {
-            var url = (status.HasValue) ? "/?status=" + ((int)status.Value).ToString() : "/";
+            var url = "";
+
+            if (status.HasValue)
+                url = "?status=" + ((int)status.Value).ToString();
+
             return GetAsync<IEnumerable<BasketDTO>>(url);
         }
 
         public async Task<Guid> Post()
         {
-            var url = "/";
+            var url = "";
             var response = await _httpClient.PostAsync(url, null);
             return await ReadAsAsync<Guid>(response.Content);
         }

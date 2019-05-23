@@ -32,7 +32,7 @@
 
         public Task<IEnumerable<ProductDTO>> GetProducts(string name, decimal? price, int? stock)
         {
-            var url = "/?";
+            var url = "";
 
             var stringParameters = "";
 
@@ -45,7 +45,8 @@
             if (stock.HasValue)
                 stringParameters += "&stock=" + stock.Value.ToString();
 
-            url += stringParameters;
+            if (!string.IsNullOrEmpty(stringParameters))
+                url = "?" + stringParameters.Substring(stringParameters.IndexOf("&") + 1);
 
             return GetAsync<IEnumerable<ProductDTO>>(url);
         }
