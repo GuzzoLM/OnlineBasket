@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OnlineBasket.Client.Interfaces
+﻿namespace OnlineBasket.Client.Interfaces
 {
-    interface IProductGroupClient
+    using System;
+    using System.Threading.Tasks;
+    using OnlineBasket.Domain.DTO;
+
+    public interface IProductGroupClient
     {
+        Task Put(Guid bid, ProductGroupDTO productGroup);
+
+        Task Delete(Guid bid, Guid? id);
     }
 }
