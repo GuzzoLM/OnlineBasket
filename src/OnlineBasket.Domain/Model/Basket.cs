@@ -4,8 +4,9 @@
     using System.Collections.Generic;
     using System.Linq;
     using OnlineBasket.Domain.Enums;
+    using OnlineBasket.Domain.Interfaces;
 
-    public class Basket
+    public class Basket : IIdAware
     {
         public Guid Id { get; set; }
 

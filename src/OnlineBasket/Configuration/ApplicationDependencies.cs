@@ -17,7 +17,7 @@
     internal static class ApplicationDependencies
     {
         /// <summary>
-        /// Add application's dependencies to the container
+        /// Add applications dependencies to the container
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
@@ -25,6 +25,7 @@
         {
             services.AddSingleton<IUserCollection, UserCollection>();
             services.AddSingleton<IProductCollection, ProductCollection>();
+            services.AddSingleton<IBasketCollection, BasketCollection>();
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
