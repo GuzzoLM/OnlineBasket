@@ -1,10 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OnlineBasket.Client.Interfaces
+﻿namespace OnlineBasket.Client.Interfaces
 {
-    interface IProductsClient
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using OnlineBasket.Domain.DTO;
+
+    public interface IProductsClient
     {
+        Task<IEnumerable<ProductDTO>> GetProducts(string name, decimal? price, int? stock);
+
+        Task<ProductDTO> GetProduct(Guid id);
+
+        Task<Guid> Post(ProductDTO product);
+
+        Task Put(Guid id, ProductDTO product);
+
+        Task Delete(Guid id);
     }
 }

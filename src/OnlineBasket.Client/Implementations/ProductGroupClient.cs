@@ -8,10 +8,9 @@
     using OnlineBasket.Client.Interfaces;
     using OnlineBasket.Domain.DTO;
 
-    internal class ProductGroupClient : IProductGroupClient
+    public class ProductGroupClient : BaseClient, IProductGroupClient
     {
         public readonly string _baseAddress = "api/{basketId}/ProductGroup";
-        private readonly HttpClient _httpClient;
 
         public ProductGroupClient(string apiEndpoint, HttpClient httpClient)
         {
@@ -31,10 +30,7 @@
         public Task Put(Guid bid, ProductGroupDTO productGroup)
         {
             var url = AddresWithBasketId(bid);
-            var content = JsonConvert.SerializeObject(productGroup);
-            var buffer = System.Text.Encoding.UTF8.GetBytes(content);
-            var byteContent = new ByteArrayContent(buffer);
-            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            var byteContent = ByteContent(productGroup);
 
             return _httpClient.PutAsync(url, byteContent);
         }

@@ -9,10 +9,9 @@
     using OnlineBasket.Domain.DTO;
     using OnlineBasket.Domain.Enums;
 
-    public class BasketClient : IBasketClient
+    public class BasketClient : BaseClient, IBasketClient
     {
         public readonly string _baseAddress = "api/Basket";
-        private readonly HttpClient _httpClient;
 
         public BasketClient(string apiEndpoint, HttpClient httpClient)
         {
@@ -46,16 +45,6 @@
             return await ReadAsAsync<Guid>(response.Content);
         }
 
-        private async Task<T> GetAsync<T>(string url)
-        {
-            var response = await _httpClient.GetAsync(url);
-            return await ReadAsAsync<T>(response.Content);
-        }
-
-        private async Task<T> ReadAsAsync<T>(HttpContent content)
-        {
-            var stringContent = await content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<T>(stringContent);
-        }
+        
     }
 }
