@@ -32,6 +32,7 @@
         {
             var existentUser = await _userService.FindUser(user.UserName);
 
+            // If user is new, it will be added to DataCollection
             if (existentUser == null)
             {
                 user.Id = Guid.NewGuid();
