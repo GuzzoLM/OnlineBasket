@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using OnlineBasket.Domain.DTO;
 
-    public interface IProductsClient
+    public interface IProductClient
     {
         Task<IEnumerable<ProductDTO>> GetProducts(string name, decimal? price, int? stock);
 

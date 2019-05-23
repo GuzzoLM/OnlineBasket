@@ -7,7 +7,7 @@
     using OnlineBasket.Client.Interfaces;
     using OnlineBasket.Domain.DTO;
 
-    public class ProductClient : BaseClient, IProductsClient
+    public class ProductClient : BaseClient, IProductClient
     {
         public readonly string _baseAddress = "api/Product";
 
