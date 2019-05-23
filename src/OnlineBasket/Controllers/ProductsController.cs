@@ -33,7 +33,7 @@
         [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
-        public async Task<ActionResult<IEnumerable<Product>>> Get(
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> Get(
             [FromQuery] string name = null,
             [FromQuery] decimal? price = null,
             [FromQuery] int? stock = null)
@@ -54,7 +54,7 @@
         [ProducesResponseType(200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<Product>> Get(Guid id)
+        public async Task<ActionResult<ProductDTO>> Get(Guid id)
         {
             try
             {
@@ -79,7 +79,7 @@
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<ActionResult<Guid>> Post([FromBody] Product newProduct)
+        public async Task<ActionResult<Guid>> Post([FromBody] ProductDTO newProduct)
         {
             try
             {
@@ -105,7 +105,7 @@
         [ProducesResponseType(204)]
         [ProducesResponseType(401)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult> Put(Guid id, [FromBody] Product product)
+        public async Task<ActionResult> Put(Guid id, [FromBody] ProductDTO product)
         {
             try
             {
