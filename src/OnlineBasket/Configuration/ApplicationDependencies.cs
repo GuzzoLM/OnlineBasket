@@ -17,16 +17,12 @@
     internal static class ApplicationDependencies
     {
         /// <summary>
-        /// Add applications dependencies to the container
+        /// Add applications services to container
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
         internal static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-            services.AddSingleton<IUserCollection, UserCollection>();
-            services.AddSingleton<IProductCollection, ProductCollection>();
-            services.AddSingleton<IBasketCollection, BasketCollection>();
-
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IBasketRepository, BasketRepository>();
@@ -35,24 +31,39 @@
             return services;
         }
 
+        /// <summary>
+        /// Add collection services that simulate database
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
         internal static IServiceCollection RegisterDatabase(this IServiceCollection services)
         {
             services.AddSingleton<IUserCollection, UserCollection>();
+            services.AddSingleton<IProductCollection, ProductCollection>();
+            services.AddSingleton<IBasketCollection, BasketCollection>();
 
             return services;
         }
 
+        /// <summary>
+        /// Register and configure authentication services
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         internal static IServiceCollection RegisterAuthServices(this IServiceCollection services, IConfiguration configuration)
         {
+            // This configuration will hold secret key and crendentials
             var signingConfigurations = new SigningConfigurations();
             services.AddSingleton(signingConfigurations);
 
+            // COnfiguration for token, eg, expiration time, issuer, etc.
             var tokenConfigurations = new TokenConfigurations();
             new ConfigureFromConfigurationOptions<TokenConfigurations>(configuration.GetSection("TokenConfigurations"))
                     .Configure(tokenConfigurations);
-
             services.AddSingleton(tokenConfigurations);
 
+            // Add JWT default schemas
             services.AddAuthentication(authOptions =>
             {
                 authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -70,6 +81,7 @@
 
             services.AddAuthorization(auth =>
             {
+                // Add a policy to check if user has a valid token
                 auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
                     .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
                     .RequireAuthenticatedUser().Build());

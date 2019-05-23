@@ -16,6 +16,6 @@
 
         Task Update(Guid id, Basket item);
 
-        Task Delete(Guid id);
+        Task Delete(Guid ownerId, Guid id);
     }
 }

@@ -71,6 +71,7 @@
         {
             // Arrange
             var basketId = Guid.NewGuid();
+            var ownerId = Guid.NewGuid();
 
             // Arrange Mock
             _basketCollection
@@ -78,7 +79,7 @@
                 .ReturnsAsync(true);
 
             // Act
-            Func<Task> act = async () => await _basketRepository.Delete(basketId);
+            Func<Task> act = async () => await _basketRepository.Delete(ownerId, basketId);
 
             // Assert
             act.Should()
@@ -90,6 +91,7 @@
         {
             // Arrange
             var basketId = Guid.NewGuid();
+            var ownerId = Guid.NewGuid();
 
             // Arrange Mock
             _basketCollection
@@ -97,7 +99,7 @@
                 .ReturnsAsync(false);
 
             // Act
-            Func<Task> act = async () => await _basketRepository.Delete(basketId);
+            Func<Task> act = async () => await _basketRepository.Delete(ownerId, basketId);
 
             // Assert
             act.Should()

@@ -27,8 +27,13 @@
             throw new ArgumentException("Item already exists");
         }
 
-        public async Task Delete(Guid id)
+        public async Task Delete(Guid ownerId, Guid id)
         {
+            var baskets = await _basketCollection.Items();
+
+            if (baskets.FirstOrDefault(x => x.Id == id)?.OwnerId != ownerId)
+                throw new UnauthorizedAccessException();
+
             var result = await _basketCollection.Delete(id);
 
             if (!result)

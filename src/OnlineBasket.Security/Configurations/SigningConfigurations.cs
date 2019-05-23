@@ -3,6 +3,9 @@
     using System.Security.Cryptography;
     using Microsoft.IdentityModel.Tokens;
 
+    /// <summary>
+    /// Hold configuration for credentials
+    /// </summary>
     public class SigningConfigurations
     {
         public SecurityKey Key { get; }
