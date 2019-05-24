@@ -73,10 +73,22 @@
             var basketId = Guid.NewGuid();
             var ownerId = Guid.NewGuid();
 
+            var baskets = new List<Basket>
+            {
+                _fixture.Build<Basket>()
+                .With(x => x.OwnerId, ownerId)
+                .With(x => x.Id, basketId)
+                .Create()
+            };
+
             // Arrange Mock
             _basketCollection
                 .Setup(x => x.Delete(It.IsAny<Guid>()))
                 .ReturnsAsync(true);
+
+            _basketCollection
+                .Setup(x => x.Items())
+                .ReturnsAsync(baskets);
 
             // Act
             Func<Task> act = async () => await _basketRepository.Delete(ownerId, basketId);
